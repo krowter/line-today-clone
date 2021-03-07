@@ -1,0 +1,16 @@
+export interface DirectionProps {
+  upwardIf?: boolean;
+  leftwardIf?: boolean;
+  downwardIf?: boolean;
+  rightwardIf?: boolean;
+}
+
+export const getDirection = (
+  props: DirectionProps,
+  initialDirection = 0 /* take right direction as 0 degrees */,
+  unit = "deg"
+) => {
+  if (props.leftwardIf) return 180 + initialDirection + unit;
+  if (props.downwardIf) return 90 + initialDirection + unit;
+  if (props.upwardIf) return 270 + initialDirection + unit;
+};

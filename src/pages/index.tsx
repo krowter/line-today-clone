@@ -6,7 +6,7 @@ import { Container } from "bases/Container";
 import { Tabs } from "blocks/Tabs";
 
 const Main = styled.main`
-  background-color: ${({ theme }) => theme.color.lightGray};
+  background-color: #eee;
 `;
 
 const HomePage = () => {
@@ -133,7 +133,6 @@ const HomePage = () => {
       <Main>
         <Container background="white">
           <Header />
-
           <Tabs items={categoryList} />
         </Container>
       </Main>
