@@ -7,9 +7,9 @@ export interface DirectionProps {
 
 export const getDirection = (
   props: DirectionProps,
-  initialDirection = 0 /* take right direction as 0 degrees */,
-  unit = "deg"
+  initialDirection = 0 /* take right direction as 0 degrees */
 ) => {
+  const unit = "deg";
   if (props.leftwardIf) return 180 + initialDirection + unit;
   if (props.downwardIf) return 90 + initialDirection + unit;
   if (props.upwardIf) return 270 + initialDirection + unit;

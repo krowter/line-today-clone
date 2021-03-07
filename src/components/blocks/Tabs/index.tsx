@@ -1,4 +1,11 @@
-import { useState, useRef, useContext, useEffect } from "react";
+import {
+  useState,
+  useRef,
+  useContext,
+  useCallback,
+  useEffect,
+  memo,
+} from "react";
 import Slider from "react-slick";
 import { ThemeContext } from "styled-components";
 
@@ -19,21 +26,21 @@ interface TabItem {
 
 export type TabProps = TabItem & { isActive?: boolean; onClick?: () => void };
 
-const Tab: React.FC<TabProps> = ({ name, onClick, isActive }) => {
+const Tab: React.FC<TabProps> = memo(({ name, onClick, isActive }) => {
   return (
     <_Tab onClick={onClick} isActive={isActive}>
       {name}
     </_Tab>
   );
-};
+});
 
 export const Tabs: React.FC<{ items: TabItem[] }> = ({ items }) => {
   const theme = useContext(ThemeContext);
   const [activeTabIndex, setActiveTabIndex] = useState(0);
 
-  const [isCollapsibleTabMounted, setIsCollapsibleTabMounted] = useState(false);
+  const [isCollapsibleTabMounted, setIsCollapsibleTabMounted] = useState(true);
   const [isCollapsed, setIsCollapsed] = useState(
-    false
+    true
   ); /* show all tabs when not collapsed */
 
   /* listen to isCollapsed change to allow fading animation */
@@ -41,6 +48,7 @@ export const Tabs: React.FC<{ items: TabItem[] }> = ({ items }) => {
     if (isCollapsibleTabMounted) {
       setTimeout(() => {
         setIsCollapsed(true);
+        sliderRef.current?.slickGoTo(activeTabIndex - 1);
       }, 300);
     } else {
       setIsCollapsed(false);
@@ -59,13 +67,13 @@ export const Tabs: React.FC<{ items: TabItem[] }> = ({ items }) => {
     variableWidth: true,
   };
 
-  const updateActiveTab = (index: number) => {
+  const updateActiveTab = useCallback((index: number) => {
     setActiveTabIndex(index);
 
     /* scroll the slider so the active tab
-    becomes the 2nd tab from the left */
+      becomes the 2nd tab from the left */
     sliderRef.current?.slickGoTo(index - 1);
-  };
+  }, []);
 
   return (
     <section className="slick-arrows-inside slider variable-width">
