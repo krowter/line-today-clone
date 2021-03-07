@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Tab = styled.div<{ isActive: boolean }>`
+export const Tab = styled.div<{ isActive?: boolean }>`
   display: inline-block;
   padding: 1rem;
   cursor: pointer;
