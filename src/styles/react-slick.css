@@ -1,0 +1,23 @@
+.slick-list {
+  margin-bottom: -7px;
+}
+
+/* react-slick left and right arrow button */
+.slick-prev:before,
+.slick-next:before {
+  color: black !important;
+}
+.slick-arrows-inside .slick-prev {
+  left: 1%;
+  z-index: 1;
+}
+.slick-arrows-inside .slick-next {
+  right: 1%;
+}
+
+.slick-items-with-spacing .slick-slide {
+  padding: 0 10px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  box-sizing: border-box;
+}
