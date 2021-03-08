@@ -10,18 +10,47 @@ import { Tabs } from "blocks/Tabs";
 import { fetchArticles, ArticlesData } from "redux/actions/articleAction";
 import { openTab as _openTab } from "redux/actions/tabAction";
 import { ArticlesState } from "redux/reducers/articleReducer";
+import { TabsState } from "redux/reducers/tabReducer";
+
+import { ArticleCard } from "blocks/ArticleCard";
 
 const Main = styled.main`
   background-color: #eee;
 `;
 
-const HomePage = ({ loading, items, fetchArticles, openTab, tabs }: any) => {
-  useEffect(() => {
-    fetchArticles();
-  }, []);
-  console.log({ tabs });
+const article = {
+  id: 111489713,
+  source: "AUTO",
+  status: "AVAILABLE",
+  categoryName: "News",
+  categoryId: 100271,
+  title:
+    "Kronologi Cekcok Pimpinan KPK Nawawi Pomolango dan Putra Amien Rais di Pesawat Versi KPK",
+  publisher: "Kompas.com",
+  publisherId: "100014",
+  publisherImageCdnHash: "http://www.kompas.com/",
+  badgeText: "",
+  publishTimeUnix: 1597412738000,
+  thumbnail: {
+    type: "IMAGE",
+    hash:
+      "0hXBYyshuAB21kAC48_tV4Ol5WBAJXbBRuADZWczRuWVkeMkczXm9LWEhTCwoeY0AzCjFKDUAAHFwbNkNoDGBL",
+    quality: 0,
+  },
+  url: {
+    hash: "JqnNqJ",
+    url:
+      "https://today.line.me/id/article/Kronologi+Cekcok+Pimpinan+KPK+Nawawi+Pomolango+dan+Putra+Amien+Rais+di+Pesawat+Versi+KPK-JqnNqJ",
+  },
+  type: 0,
+  postId: "111489713",
+};
 
-  const { categoryList = [], categories = [] }: ArticlesData = items ?? {};
+const HomePage = ({ loading, items, fetchArticles, openTab, tabs }: any) => {
+  // useEffect(() => {
+  //   fetchArticles();
+  // }, []);
+  const { categoryList = [] }: ArticlesData = items ?? {};
   return (
     <>
       <Head>
@@ -40,11 +69,11 @@ const HomePage = ({ loading, items, fetchArticles, openTab, tabs }: any) => {
       </Head>
 
       <Main>
-        <button onClick={openTab}>OPEN</button>
         <Container background="white">
           <Header />
 
           {loading ? <span>Loading</span> : <Tabs items={categoryList} />}
+          <ArticleCard article={article} />
         </Container>
       </Main>
     </>

@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Pill = styled.div<{ isActive: boolean }>`
   display: inline-block;
-  border-radius: ${({ theme }) => theme.size.lg};
+  border-radius: ${({ theme }) => theme.size.xs};
   padding: 0.75rem;
 
   border: 1px solid ${({ theme }) => theme.color.gray};

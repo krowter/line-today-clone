@@ -76,7 +76,7 @@ export const Tabs: React.FC<{ items: TabItem[] }> = ({ items }) => {
   }, []);
 
   return (
-    <section className="slider variable-width">
+    <section className="slider variable-width" style={{ position: "relative" }}>
       <CollapsedTabsContainer>
         {isCollapsed ? (
           <Slider ref={sliderRef} {...sliderSettings}>

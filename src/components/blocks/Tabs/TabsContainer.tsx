@@ -31,4 +31,6 @@ export const UncollapsedTabsContainer = styled.div<{ mounted: boolean }>`
   padding: 0.75rem;
   animation: ${({ mounted }) => (mounted ? fadeOutUp : fadeInDown)} 0.4s
     ease-in-out both;
+  position: absolute;
+  background: ${({ theme }) => theme.color.white};
 `;

@@ -10,6 +10,8 @@ export const Tab = styled.div<{ isActive?: boolean }>`
     color: ${({ theme }) => theme.color.dark};
   }
 
+  border-bottom: 3px solid transparent;
+
   ${({ isActive, theme }) =>
     isActive &&
     `font-weight: ${theme.fontWeight.semibold}; 

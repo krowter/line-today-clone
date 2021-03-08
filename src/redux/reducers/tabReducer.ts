@@ -7,6 +7,8 @@ const initialState = {
   error: null,
 };
 
+export type TabsState = typeof initialState;
+
 export const tabReducer = (state = initialState, action: TabAction) => {
   switch (action.type) {
     case OPEN_TAB.BEGIN:
