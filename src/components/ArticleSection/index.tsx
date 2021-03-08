@@ -18,7 +18,7 @@ const {
 } = getConfig();
 
 const _ArticleSection = ({ templates, tabs }: any) => {
-  const [templatesPerPage, setTemplatesPerPage] = useState(6);
+  const [templatesPerPage, setTemplatesPerPage] = useState(8);
 
   return (
     <ArticleSectionContainer mounted={tabs.loading}>

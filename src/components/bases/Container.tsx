@@ -11,7 +11,6 @@ export const Container = styled.div<ContainerProps>`
   @media (min-width: 968px) {
     max-width: 768px;
   }
-  height: inherit;
 
   margin-left: auto;
   margin-right: auto;
@@ -21,7 +20,7 @@ export const Container = styled.div<ContainerProps>`
 `;
 
 export const Main = styled.main`
-  height: 100%;
+  min-height: 100%;
   background-color: #ededed;
 `;
 
