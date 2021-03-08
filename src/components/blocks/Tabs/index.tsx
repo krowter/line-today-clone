@@ -43,13 +43,13 @@ export const Tabs: React.FC<{ items: TabItem[] }> = ({ items }) => {
     true
   ); /* show all tabs when not collapsed */
 
-  /* listen to isCollapsed change to allow fading animation */
+  /* listen to isCollapsed changes to allow fading in/out animation */
   useEffect(() => {
     if (isCollapsibleTabMounted) {
       setTimeout(() => {
         setIsCollapsed(true);
         sliderRef.current?.slickGoTo(activeTabIndex - 1);
-      }, 300);
+      }, 400);
     } else {
       setIsCollapsed(false);
     }
@@ -76,15 +76,15 @@ export const Tabs: React.FC<{ items: TabItem[] }> = ({ items }) => {
   }, []);
 
   return (
-    <section className="slick-arrows-inside slider variable-width">
+    <section className="slider variable-width">
       <CollapsedTabsContainer>
         {isCollapsed ? (
           <Slider ref={sliderRef} {...sliderSettings}>
             {items.map((item, index) => {
               return (
                 <Tab
-                  key={item.id}
                   {...item}
+                  key={item.id}
                   isActive={activeTabIndex === index}
                   onClick={() => updateActiveTab(index)}
                 />

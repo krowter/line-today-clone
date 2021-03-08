@@ -4,8 +4,15 @@ export const Tab = styled.div<{ isActive?: boolean }>`
   display: inline-block;
   padding: 1rem;
   cursor: pointer;
+  color: ${({ theme }) => theme.color.darkGray};
+
+  &:hover {
+    color: ${({ theme }) => theme.color.dark};
+  }
 
   ${({ isActive, theme }) =>
     isActive &&
-    `font-weight: ${theme.fontWeight.semibold}; border-bottom: 3px solid black;`};
+    `font-weight: ${theme.fontWeight.semibold}; 
+    border-bottom: 3px solid black;
+    color: ${theme.color.dark}`};
 `;

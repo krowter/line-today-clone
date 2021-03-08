@@ -28,6 +28,7 @@ export const CollapsedTabsContainer = styled.div`
 `;
 
 export const UncollapsedTabsContainer = styled.div<{ mounted: boolean }>`
-  animation: ${({ mounted }) => (mounted ? fadeOutUp : fadeInDown)} 0.3s
+  padding: 0.75rem;
+  animation: ${({ mounted }) => (mounted ? fadeOutUp : fadeInDown)} 0.4s
     ease-in-out both;
 `;
