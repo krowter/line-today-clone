@@ -6,8 +6,8 @@ const fadeSideIn = fadeIn("LEFT");
 const fadeSideOut = fadeOut("RIGHT");
 
 export const ArticleSectionContainer = styled.section<{ mounted: boolean }>`
-  margin-left: 1rem;
-  margin-right: 1rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
 
   animation: ${({ mounted }) => (mounted ? fadeSideOut : fadeSideIn)} 0.4s
     ease-in-out both;

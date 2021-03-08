@@ -1,21 +1,17 @@
 import { useEffect } from "react";
-import styled from "styled-components";
 import Head from "next/head";
+import Image from "next/image";
 import { connect } from "react-redux";
 
 import { Header } from "blocks/Header";
-import { Container } from "bases/Container";
+import { Container, CenteredContainer, Main } from "bases/Container";
 import { Tabs } from "blocks/Tabs";
-import { ArticleSection } from "sections/ArticleSection";
+import { ArticleSection } from "components/ArticleSection";
 
 import { fetchArticles, ArticlesData } from "redux/actions/articleAction";
 import { openTab as _openTab } from "redux/actions/tabAction";
 import { ArticlesState } from "redux/reducers/articleReducer";
 import { TabsState } from "redux/reducers/tabReducer";
-
-const Main = styled.main`
-  background-color: #ededed;
-`;
 
 const HomePage = ({ loading, items, fetchArticles, tabs, openTab }: any) => {
   useEffect(() => {
@@ -49,7 +45,9 @@ const HomePage = ({ loading, items, fetchArticles, tabs, openTab }: any) => {
         <Container background="lightgray">
           <Header />
           {loading ? (
-            <span>Loading</span>
+            <CenteredContainer>
+              <Image src="/static/spinner.svg" width="100px" height="100px" />
+            </CenteredContainer>
           ) : (
             <>
               <Tabs items={categoryList} />

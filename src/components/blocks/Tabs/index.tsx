@@ -64,8 +64,10 @@ const _Tabs: React.FC<{
         setIsCollapsed(true);
         sliderRef.current?.slickGoTo(activeTabIndex - 1);
       }, 400);
+      document.body.style.overflow = "auto";
     } else {
       setIsCollapsed(false);
+      document.body.style.overflow = "hidden";
     }
   }, [isCollapsibleTabMounted]);
 

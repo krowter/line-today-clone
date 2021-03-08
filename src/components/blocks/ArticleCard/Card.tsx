@@ -56,10 +56,10 @@ export const CardMedia = styled.img<{ type: string }>`
         & > div { margin-left: ${theme.size["2xs"]}; }`;
 
       case "regular":
-        return `@media(min-width: 1024px) {
+        return `@media(min-width: 768px) {
           height: ${theme.size["xl"]};
         }
-        @media(max-width: 1023px) {
+        @media(max-width: 767px) {
           height: calc(${theme.size["md"]} + 1rem);
         }`;
       default:
