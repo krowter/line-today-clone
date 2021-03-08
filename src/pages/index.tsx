@@ -6,14 +6,12 @@ import { connect } from "react-redux";
 import { Header } from "blocks/Header";
 import { Container } from "bases/Container";
 import { Tabs } from "blocks/Tabs";
-import { ArticleCard } from "blocks/ArticleCard";
+import { ArticleSection } from "sections/ArticleSection";
 
 import { fetchArticles, ArticlesData } from "redux/actions/articleAction";
 import { openTab as _openTab } from "redux/actions/tabAction";
 import { ArticlesState } from "redux/reducers/articleReducer";
 import { TabsState } from "redux/reducers/tabReducer";
-
-import { Article } from "types";
 
 const Main = styled.main`
   background-color: #ededed;
@@ -5451,11 +5449,13 @@ const mockData = {
   allAdLazyloadingOn: false,
 };
 
-const HomePage = ({ loading, items, fetchArticles, openTab, tabs }: any) => {
+const HomePage = ({ loading, items, fetchArticles, tabs }: any) => {
   useEffect(() => {
-    fetchArticles();
+    fetchArticles("/api/articles");
   }, []);
+
   const { categoryList = [] }: ArticlesData = items ?? {};
+
   return (
     <>
       <Head>
@@ -5477,38 +5477,14 @@ const HomePage = ({ loading, items, fetchArticles, openTab, tabs }: any) => {
         <Container background="lightgray">
           <Header />
 
-          {loading ? <span>Loading</span> : <Tabs items={categoryList} />}
-          {mockData.templates.map((template) => {
-            const isAd = template.sections[0]?.articles[0]?.source === "AD";
-
-            if (isAd) return <h1>Iklan</h1>;
-
-            return (
-              <div key={template.id}>
-                <h1>{template.title}</h1>
-                {template.sections.map((section, index) => (
-                  <div
-                    key={index}
-                    style={{
-                      display: "flex",
-                      flexWrap: "wrap",
-                      justifyContent: "space-between",
-                    }}
-                  >
-                    {section.articles.slice(0, 2).map((article: any) => {
-                      return (
-                        <ArticleCard
-                          key={article.id}
-                          type="row-card"
-                          article={article}
-                        />
-                      );
-                    })}
-                  </div>
-                ))}
-              </div>
-            );
-          })}
+          {loading ? (
+            <span>Loading</span>
+          ) : (
+            <>
+              <Tabs items={categoryList} />
+              <ArticleSection templates={mockData.templates} />
+            </>
+          )}
         </Container>
       </Main>
     </>
@@ -5525,7 +5501,7 @@ const mapStateToProps = (state: {
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
-  fetchArticles: () => dispatch(fetchArticles("/api/articles")),
+  fetchArticles: (url) => dispatch(fetchArticles(url)),
   openTab: () => dispatch(_openTab("TOP")),
 });
 

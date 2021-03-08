@@ -12,7 +12,7 @@
       "lib/*": ["lib/*"],
       "bases/*": ["components/bases/*"],
       "blocks/*": ["components/blocks/*"],
-      "layouts/*": ["components/layouts/*"],
+      "sections/*": ["components/sections/*"],
       "styles/*": ["styles/*"]
     },
     "esModuleInterop": true,

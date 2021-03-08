@@ -6,7 +6,7 @@ const color = {
   dark: "#292929",
   gray: "#dbdbdb",
   lightgray: "#f5f5f5",
-  darkgray: "#9c9c9c",
+  darkgray: "#909090",
   orange: "#ffbb0f",
 };
 
@@ -21,7 +21,7 @@ const fontSize = {
   "4xl": "2.25rem",
   "5xl": "3rem",
   "6xl": "3.75rem",
-  "7xl": "4.5rem",
+  "7xl": "4.5rem",  
   "8xl": "6rem",
   "9xl": "8rem",
 };
