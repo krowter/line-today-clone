@@ -1,6 +1,6 @@
 # Len Tudei
 
-This is a clone of Line Today's homepage I built as part of technical test in a job interview process.
+Len Tudei (playword of "Line Today") is a clone of Line Today's homepage I built as part of technical test in a job interview process.
 
 ## Build with
 
