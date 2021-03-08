@@ -1,5 +1,9 @@
 import styled from "styled-components";
 
+const _Header = styled.header`
+  background: white;
+`;
+
 const Logo = styled.img`
   padding: 0.75rem;
   box-sizing: border-box;
@@ -8,8 +12,8 @@ const Logo = styled.img`
 
 export const Header: React.FC = () => {
   return (
-    <header>
+    <_Header>
       <Logo src="/static/logo.png" />
-    </header>
+    </_Header>
   );
 };

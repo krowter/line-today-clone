@@ -16,7 +16,7 @@ import { TabsState } from "redux/reducers/tabReducer";
 import { Article } from "types";
 
 const Main = styled.main`
-  background-color: #eee;
+  background-color: #ededed;
 `;
 
 const mockData = {
@@ -5452,9 +5452,9 @@ const mockData = {
 };
 
 const HomePage = ({ loading, items, fetchArticles, openTab, tabs }: any) => {
-  // useEffect(() => {
-  //   fetchArticles();
-  // }, []);
+  useEffect(() => {
+    fetchArticles();
+  }, []);
   const { categoryList = [] }: ArticlesData = items ?? {};
   return (
     <>
@@ -5474,7 +5474,7 @@ const HomePage = ({ loading, items, fetchArticles, openTab, tabs }: any) => {
       </Head>
 
       <Main>
-        <Container background="white">
+        <Container background="lightgray">
           <Header />
 
           {loading ? <span>Loading</span> : <Tabs items={categoryList} />}
@@ -5482,7 +5482,7 @@ const HomePage = ({ loading, items, fetchArticles, openTab, tabs }: any) => {
             const isAd = template.sections[0]?.articles[0]?.source === "AD";
 
             if (isAd) return <h1>Iklan</h1>;
-            console.log(template.title);
+
             return (
               <div key={template.id}>
                 <h1>{template.title}</h1>
@@ -5499,7 +5499,7 @@ const HomePage = ({ loading, items, fetchArticles, openTab, tabs }: any) => {
                       return (
                         <ArticleCard
                           key={article.id}
-                          // type=  "row-card"
+                          type="row-card"
                           article={article}
                         />
                       );

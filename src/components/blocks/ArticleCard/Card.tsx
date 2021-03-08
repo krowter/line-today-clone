@@ -1,20 +1,6 @@
 import styled from "styled-components";
 
 export const Card = styled.div<{ type: string }>`
-  max-width: ${({ theme, type }) =>
-    type === "row-card" ? "100%" : theme.size["2xl"]};
-
-  flex-basis: ${({ theme, type }) =>
-    type === "regular" && `calc(50% - ${theme.size.sm})`};
-
-  display: ${({ type }) => (type === "row-card" ? "flex" : "block")};
-  flex-direction: row;
-
-  & > div {
-    margin-left: ${({ theme, type }) =>
-      type === "row-card" && theme.size["2xs"]};
-  }
-
   .badge-text {
     margin-right: 0.25rem;
   }
@@ -29,15 +15,45 @@ export const Card = styled.div<{ type: string }>`
     color: ${({ theme }) => theme.color.darkGray};
     font-size: ${({ theme }) => theme.fontSize.sm};
   }
+
+  flex-direction: row;
+
+  ${({ theme, type }) => {
+    switch (type) {
+      case "row-card":
+        return `max-width: 100%; 
+                display: flex;
+                & > div { margin-left: ${theme.size["2xs"]}; }`;
+
+      case "regular":
+        return `max-width: ${theme.size["2xl"]}; 
+                display: black; 
+                flex-basis: calc(50% - ${theme.size.sm}); `;
+      default:
+        break;
+    }
+  }}
 `;
 
 export const CardMedia = styled.img<{ type: string }>`
   border-radius: ${({ theme }) => theme.size["2xs"]};
-  min-width: ${({ theme, type }) => type === "row-card" && theme.size.lg};
-  height: ${({ theme, type }) => type === "regular" && theme.size["xl"]};
-
   object-fit: cover;
   width: 100%;
 
-  max-height: ${({ theme, type }) => type === "row-card" && theme.size["md"]};
+  ${({ theme, type }) => {
+    switch (type) {
+      case "row-card":
+        return `min-width: ${theme.size.lg};
+                max-width: ${theme.size.lg};
+                margin-bottom: ${theme.size.xs};
+                height: ${theme.size["md"]};
+                display: flex;
+                & > div { margin-left: ${theme.size["2xs"]}; }`;
+
+      case "regular":
+        return `height: ${theme.size["xl"]};`;
+      default:
+        break;
+    }
+  }}
 `;

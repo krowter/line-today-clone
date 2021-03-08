@@ -23,6 +23,7 @@ export const CollapsibleTabs: React.FC<{
             setIsCollapsed(true);
           }}
           key={index}
+          size="xl"
           background="dark"
         >
           {item.name}
