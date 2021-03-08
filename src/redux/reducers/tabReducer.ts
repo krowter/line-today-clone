@@ -1,28 +1,28 @@
-import { FETCH_ARTICLE, ArticleAction } from "redux/actions/articleAction";
+import { OPEN_TAB, TabAction } from "redux/actions/tabAction";
 
 const initialState = {
-  items: [],
+  activeTab: "",
+  tabContent: {},
   loading: false,
   error: null,
 };
 
-export type ArticlesState = typeof initialState;
-
-export const articleReducer = (state = initialState, action: ArticleAction) => {
+export const tabReducer = (state = initialState, action: TabAction) => {
   switch (action.type) {
-    case FETCH_ARTICLE.BEGIN:
+    case OPEN_TAB.BEGIN:
       return {
         ...state,
         loading: true,
         error: null,
       };
-    case FETCH_ARTICLE.SUCCESS:
+    case OPEN_TAB.SUCCESS:
       return {
         ...state,
         loading: false,
-        items: action.payload.articles,
+        tabContent: action.payload.tabContent,
+        activeTab: action.payload.tab,
       };
-    case FETCH_ARTICLE.ERROR:
+    case OPEN_TAB.ERROR:
       return {
         ...state,
         loading: false,

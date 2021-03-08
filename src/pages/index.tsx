@@ -7,20 +7,21 @@ import { Header } from "blocks/Header";
 import { Container } from "bases/Container";
 import { Tabs } from "blocks/Tabs";
 
-import { fetchArticles } from "redux/actions/articleAction";
+import { fetchArticles, ArticlesData } from "redux/actions/articleAction";
+import { openTab as _openTab } from "redux/actions/tabAction";
 import { ArticlesState } from "redux/reducers/articleReducer";
 
 const Main = styled.main`
   background-color: #eee;
 `;
 
-const HomePage = ({ dispatch, loading, items }: any) => {
+const HomePage = ({ loading, items, fetchArticles, openTab, tabs }: any) => {
   useEffect(() => {
-    dispatch(fetchArticles());
+    fetchArticles();
   }, []);
+  console.log({ tabs });
 
-  const { categoryList = [], categories = [] } = items ?? {};
-
+  const { categoryList = [], categories = [] }: ArticlesData = items ?? {};
   return (
     <>
       <Head>
@@ -39,6 +40,7 @@ const HomePage = ({ dispatch, loading, items }: any) => {
       </Head>
 
       <Main>
+        <button onClick={openTab}>OPEN</button>
         <Container background="white">
           <Header />
 
@@ -49,10 +51,18 @@ const HomePage = ({ dispatch, loading, items }: any) => {
   );
 };
 
-const mapStateToProps = (state: { articles: ArticlesState }) => ({
+const mapStateToProps = (state: {
+  articles: ArticlesState;
+  tabs: TabsState;
+}) => ({
   items: state.articles.items,
   loading: state.articles.loading,
-  error: state.articles.error,
+  tabs: state.tabs,
 });
 
-export default connect(mapStateToProps)(HomePage);
+const mapDispatchToProps = (dispatch: any) => ({
+  fetchArticles: () => dispatch(fetchArticles("/api/articles")),
+  openTab: () => dispatch(_openTab("TOP")),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
