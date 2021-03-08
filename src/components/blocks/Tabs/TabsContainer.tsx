@@ -25,6 +25,7 @@ const fadeOutUp = keyframes`
 export const CollapsedTabsContainer = styled.div`
   position: relative;
   border-bottom: 1px lightgrey solid;
+  background: ${({ theme }) => theme.color.white};
 `;
 
 export const UncollapsedTabsContainer = styled.div<{ mounted: boolean }>`

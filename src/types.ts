@@ -1,20 +1,24 @@
-export interface Article {
+export interface BasePost {
   id: number;
   title: string;
   publisher: string;
   publisherId: string;
   source: string;
-  status: "AVAILABLE" | "NOTYET";
+  status: string;
   categoryName: string;
   categoryId: number;
   badgeText?: string;
   thumbnail: {
-    type: "IMAGE";
+    type: string;
     hash: string;
   };
   url: {
-    hash: string;
     url: string;
   };
   postId: string;
 }
+
+export type Article = BasePost;
+export type MoviePost = BasePost & {
+  broadcastStatus: string;
+};

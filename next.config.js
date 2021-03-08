@@ -1,9 +1,6 @@
 module.exports = {
-  serverRuntimeConfig: {
-    imageCDN: "https://obs.line-scdn.net/",
-  },
   publicRuntimeConfig: {
     imageCDN: "https://obs.line-scdn.net/",
+    emptyImagePlaceholder: "https://via.placeholder.com/500x400",
   },
-  domains: ["obs.line-scdn.net"],
 };

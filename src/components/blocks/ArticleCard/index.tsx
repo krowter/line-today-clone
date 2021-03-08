@@ -1,41 +1,42 @@
 import getConfig from "next/config";
-import styled from "styled-components";
+
+import { Pill } from "bases/Pill";
+import { Card, CardMedia } from "blocks/ArticleCard/Card";
 
 import { Article } from "types";
 
-const Card = styled.div`
-  overflow: hidden;
-  max-width: ${({ theme }) => theme.size["2xl"]};
+const {
+  publicRuntimeConfig: { imageCDN, emptyImagePlaceholder },
+} = getConfig();
+interface ArticleCardProps {
+  article: Article;
+  type?: "row-card" | "regular";
+}
 
-  .title {
-    display: block;
-    margin-top: ${({ theme }) => theme.size["3xs"]};
-    margin-bottom: ${({ theme }) => theme.size["2xs"]};
-  }
+export const ArticleCard: React.FC<ArticleCardProps> = ({
+  article,
+  type = "regular",
+}) => {
+  const { thumbnail, badgeText, title, publisher } = article;
 
-  .publisher {
-    color: ${({ theme }) => theme.color.darkGray};
-    font-size: ${({ theme }) => theme.fontSize.sm};
-  }
-`;
-
-const CardMedia = styled.img`
-  border-radius: ${({ theme }) => theme.size["2xs"]};
-  height: 200px;
-  width: 100%;
-  object-fit: cover;
-`;
-
-export const ArticleCard: React.FC<{ article: Article }> = ({ article }) => {
-  const {
-    publicRuntimeConfig: { imageCDN },
-  } = getConfig();
+  const thumbnailSource = thumbnail
+    ? imageCDN + thumbnail.hash
+    : emptyImagePlaceholder;
 
   return (
-    <Card>
-      <CardMedia src={imageCDN + article.thumbnail.hash} />
-      <span className="title">{article.title}</span>
-      <span className="publisher">{article.publisher}</span>
+    <Card type={type}>
+      <CardMedia type={type} src={thumbnailSource} />
+      <div>
+        <span className="title">
+          {badgeText && (
+            <Pill className="badge-text" background="orange" size="md">
+              {badgeText}
+            </Pill>
+          )}
+          {title}
+        </span>
+        <span className="publisher">{publisher}</span>
+      </div>
     </Card>
   );
 };

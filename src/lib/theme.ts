@@ -5,8 +5,9 @@ const color = {
   white: "#ffffff",
   dark: "#292929",
   gray: "#dbdbdb",
-  lightGray: "#f5f5f5",
-  darkGray: "#9c9c9c",
+  lightgray: "#f5f5f5",
+  darkgray: "#9c9c9c",
+  orange: "#ffbb0f",
 };
 
 const fontSize = {
@@ -43,8 +44,8 @@ const size = {
   full: "100%",
   "3xs": "0.25rem",
   "2xs": "0.5rem",
-  xs: "1rem",
-  sm: "2rem",
+  xs: "0.75rem",
+  sm: "1rem",
   md: "4rem",
   lg: "8rem",
   xl: "12rem",
