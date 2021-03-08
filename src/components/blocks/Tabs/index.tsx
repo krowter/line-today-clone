@@ -20,6 +20,7 @@ import {
 
 import { openTab as _openTab } from "redux/actions/tabAction";
 import { TabsState } from "redux/reducers/tabReducer";
+import { useOnClickOutside } from "lib/hooks";
 
 interface TabItem {
   id: number;
@@ -50,6 +51,11 @@ const _Tabs: React.FC<{
   const [isCollapsed, setIsCollapsed] = useState(
     true
   ); /* show all tabs when not collapsed */
+  const uncollapsedBarRef = useRef();
+
+  useOnClickOutside(uncollapsedBarRef, "bottom", () =>
+    setIsCollapsibleTabMounted(true)
+  );
 
   /* listen to isCollapsed changes to allow fading in/out animation */
   useEffect(() => {
@@ -114,14 +120,21 @@ const _Tabs: React.FC<{
       </CollapsedTabsContainer>
 
       {!isCollapsed && (
-        <UncollapsedTabsContainer mounted={isCollapsibleTabMounted}>
-          <CollapsibleTabs
-            items={items}
-            onTabClick={updateActiveTab}
-            activeTab={activeTab}
-            setIsCollapsed={setIsCollapsibleTabMounted}
-          />
-        </UncollapsedTabsContainer>
+        <>
+          <UncollapsedTabsContainer
+            //@ts-ignore
+            ref={uncollapsedBarRef}
+            mounted={isCollapsibleTabMounted}
+          >
+            <CollapsibleTabs
+              items={items}
+              onTabClick={updateActiveTab}
+              onClickOutside={() => setIsCollapsibleTabMounted(false)}
+              activeTab={activeTab}
+              setIsCollapsed={setIsCollapsibleTabMounted}
+            />
+          </UncollapsedTabsContainer>
+        </>
       )}
     </section>
   );

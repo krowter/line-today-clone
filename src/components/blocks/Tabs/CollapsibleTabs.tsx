@@ -9,6 +9,7 @@ const Pill = styled(BasePill)`
 
 export const CollapsibleTabs: React.FC<{
   onTabClick: (index: number, tab: string) => void;
+  onClickOutside: () => void;
   setIsCollapsed: (isCollapsed: boolean) => void;
   items: TabProps[];
   activeTab: string;
