@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import styled from "styled-components";
 import Head from "next/head";
 
@@ -5,11 +6,15 @@ import { Header } from "blocks/Header";
 import { Container } from "bases/Container";
 import { Tabs } from "blocks/Tabs";
 
+import { connect } from "react-redux";
+import { fetchArticles } from "redux/actions/articleAction";
+import { ArticlesState } from "redux/reducers/articleReducer";
+
 const Main = styled.main`
   background-color: #eee;
 `;
 
-const HomePage = () => {
+const HomePage = ({ dispatch, ...props }) => {
   const categoryList = [
     { id: 100270, name: "TOP", type: 0, lastModTime: 1597417502885 },
     { id: 100272, name: "Showbiz", type: 0, lastModTime: 1597322354843 },
@@ -113,6 +118,11 @@ const HomePage = () => {
     },
   ];
 
+  console.log(props);
+  useEffect(() => {
+    dispatch(fetchArticles());
+  }, []);
+
   return (
     <>
       <Head>
@@ -140,4 +150,10 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+const mapStateToProps = (state: { articles: ArticlesState }) => ({
+  items: state.articles.items,
+  loading: state.articles.loading,
+  error: state.articles.error,
+});
+
+export default connect(mapStateToProps)(HomePage);

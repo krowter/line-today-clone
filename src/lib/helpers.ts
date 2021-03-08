@@ -14,3 +14,10 @@ export const getDirection = (
   if (props.downwardIf) return 90 + initialDirection + unit;
   if (props.upwardIf) return 270 + initialDirection + unit;
 };
+
+export const handleFetchErrors = (response: Response) => {
+  if (!response.ok) {
+    throw Error(response.statusText);
+  }
+  return response;
+};
