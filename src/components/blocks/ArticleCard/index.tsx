@@ -22,21 +22,24 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({
   const thumbnailSource = thumbnail
     ? imageCDN + thumbnail.hash
     : emptyImagePlaceholder;
+  const sourceExtension = article.thumbnail?.type ? "/w644" : "";
 
   return (
     <Card type={type}>
-      <CardMedia type={type} src={thumbnailSource} />
-      <div>
-        <span className="title">
-          {badgeText && (
-            <Pill className="badge-text" background="orange" size="md">
-              {badgeText}
-            </Pill>
-          )}
-          {title}
-        </span>
-        <span className="publisher">{publisher}</span>
-      </div>
+      <a href={article.url?.url} rel="noopener noreferrer" target="_blank">
+        <CardMedia type={type} src={thumbnailSource + sourceExtension} />
+        <div>
+          <span className="title">
+            {badgeText && (
+              <Pill className="badge-text" background="orange" size="md">
+                {badgeText}
+              </Pill>
+            )}
+            {title}
+          </span>
+          <span className="publisher">{publisher}</span>
+        </div>
+      </a>
     </Card>
   );
 };

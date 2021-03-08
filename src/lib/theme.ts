@@ -8,6 +8,8 @@ const color = {
   lightgray: "#f5f5f5",
   darkgray: "#909090",
   orange: "#ffbb0f",
+  skyblue: "#4290f5",
+  calmgreen: "#34ba58",
 };
 
 const fontSize = {
@@ -21,7 +23,7 @@ const fontSize = {
   "4xl": "2.25rem",
   "5xl": "3rem",
   "6xl": "3.75rem",
-  "7xl": "4.5rem",  
+  "7xl": "4.5rem",
   "8xl": "6rem",
   "9xl": "8rem",
 };
