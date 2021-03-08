@@ -31,7 +31,12 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({
         <div>
           <span className="title">
             {badgeText && (
-              <Pill className="badge-text" background="orange" size="md">
+              <Pill
+                className="badge-text"
+                background="orange"
+                color="dark"
+                size="md"
+              >
                 {badgeText}
               </Pill>
             )}

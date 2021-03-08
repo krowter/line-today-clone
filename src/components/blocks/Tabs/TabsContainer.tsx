@@ -1,26 +1,8 @@
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
+import { fadeIn, fadeOut } from "styles/animations";
 
-const fadeInDown = keyframes`
-  0% {
-    opacity: 0;
-    margin-top: -10px;
-  }
-  100% {
-    opacity: 1;
-    margin-top: 0px;
-  }
-`;
-
-const fadeOutUp = keyframes`
-  0% {
-    opacity: 1;
-    margin-top: 0px;
-  }
-  100% {
-    opacity: 0;
-    margin-top: -10px;
-  }
-`;
+const fadeInDown = fadeIn("UP");
+const fadeOutUp = fadeOut("UP");
 
 export const CollapsedTabsContainer = styled.div`
   position: relative;
@@ -32,6 +14,7 @@ export const UncollapsedTabsContainer = styled.div<{ mounted: boolean }>`
   padding: 0.75rem;
   animation: ${({ mounted }) => (mounted ? fadeOutUp : fadeInDown)} 0.4s
     ease-in-out both;
+  z-index: 1;
   position: absolute;
   background: ${({ theme }) => theme.color.white};
 `;

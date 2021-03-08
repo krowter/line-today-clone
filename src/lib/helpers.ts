@@ -1,18 +1,36 @@
-export interface DirectionProps {
+export interface RotationProps {
   upwardIf?: boolean;
   leftwardIf?: boolean;
   downwardIf?: boolean;
   rightwardIf?: boolean;
 }
 
-export const getDirection = (
-  props: DirectionProps,
+export const getRotation = (
+  props: RotationProps,
   initialDirection = 0 /* take right direction as 0 degrees */
 ) => {
   const unit = "deg";
   if (props.leftwardIf) return 180 + initialDirection + unit;
   if (props.downwardIf) return 90 + initialDirection + unit;
   if (props.upwardIf) return 270 + initialDirection + unit;
+};
+
+export type Direction = "UP" | "DOWN" | "LEFT" | "RIGHT";
+
+export const getAnimationDirection = (
+  direction: Direction,
+  amount: string = "10px"
+) => {
+  switch (direction) {
+    case "UP":
+      return `margin-top: -${amount}`;
+    case "DOWN":
+      return `margin-top: ${amount}`;
+    case "RIGHT":
+      return `margin-right: ${amount}`;
+    case "LEFT":
+      return `margin-right: -${amount}`;
+  }
 };
 
 export const handleFetchErrors = (response: Response) => {

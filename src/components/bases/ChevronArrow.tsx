@@ -1,13 +1,13 @@
 import styled from "styled-components";
 
-import { getDirection, DirectionProps } from "lib/helpers";
+import { getRotation, RotationProps } from "lib/helpers";
 
-type ChevronArrowProps = DirectionProps & { size: string };
+type ChevronArrowProps = RotationProps & { size: string };
 
 const Arrow = styled.span<ChevronArrowProps>`
   display: inline-block;
   font-family: Monospace;
-  transform: rotate(${(props) => getDirection(props)});
+  transform: rotate(${(props) => getRotation(props)});
   font-size: ${({ size }) => size};
   transition: 0.2s;
 `;

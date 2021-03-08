@@ -25,6 +25,7 @@ export const CollapsibleTabs: React.FC<{
           key={index}
           size="xl"
           background="dark"
+          color="dark"
         >
           {item.name}
         </Pill>

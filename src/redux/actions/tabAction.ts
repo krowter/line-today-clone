@@ -46,10 +46,14 @@ export const openTab = (newTab: string) => (
         items: { categories },
       },
     } = getState() as any;
+
     const tabContent = categories.find(
       (category: any) => category.name === newTab
     );
-    dispatch(openTabSuccess({ tab: newTab, tabContent }));
+
+    setTimeout(() => {
+      dispatch(openTabSuccess({ tab: newTab, tabContent }));
+    }, 400); // 0.4ms delay to allow fading animation to take place
   } catch (err) {
     dispatch(openTabError("TAB_DOESNT_EXIST"));
     console.log({ ERROR: err });

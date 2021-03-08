@@ -15,16 +15,20 @@ const {
   publicRuntimeConfig: { emptyImagePlaceholder, advertisementImagePlaceholder },
 } = getConfig();
 
-const _ArticleSection = ({ templates, openTab }: any) => {
+const _ArticleSection = ({ templates, tabs, openTab }: any) => {
+  
   return (
-    <ArticleSectionContainer>
+    <ArticleSectionContainer mounted={tabs.loading}>
       {templates.map((template: any) => {
         const isAd = template.sections[0]?.articles[0]?.source === "AD";
         const hasTemplateTitle = Boolean(template.title);
 
         if (isAd)
           return (
-            <AdvertisingCard backgroundImage={advertisementImagePlaceholder}>
+            <AdvertisingCard
+              key={template.id}
+              backgroundImage={advertisementImagePlaceholder}
+            >
               Iklan
             </AdvertisingCard>
           );
@@ -39,6 +43,7 @@ const _ArticleSection = ({ templates, openTab }: any) => {
                   if (isSectionLink)
                     return (
                       <SectionLinkCard
+                        key={article.id + article.categoryName}
                         onClick={() => openTab(article.categoryName)}
                         backgroundImage={emptyImagePlaceholder}
                       >
