@@ -34,7 +34,7 @@ const _ArticleSection = ({ templates, openTab }: any) => {
             <h2>{template.title}</h2>
             {template.sections.map((section: any, index: number) => (
               <SectionContainer key={index}>
-                {section.articles.slice(0, 6).map((article: any) => {
+                {section.articles.slice(0, 3).map((article: any) => {
                   const isSectionLink = article.source === "CATABLE";
                   if (isSectionLink)
                     return (

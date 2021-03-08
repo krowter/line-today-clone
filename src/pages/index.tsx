@@ -5504,7 +5504,7 @@ const mapStateToProps = (state: {
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
-  fetchArticles: (url) => dispatch(fetchArticles(url)),
+  fetchArticles: (url: string) => dispatch(fetchArticles(url)),
   openTab: () => dispatch(_openTab("TOP")),
 });
 

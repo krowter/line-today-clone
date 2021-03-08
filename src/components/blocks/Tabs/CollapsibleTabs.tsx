@@ -8,18 +8,18 @@ const Pill = styled(BasePill)`
 `;
 
 export const CollapsibleTabs: React.FC<{
-  onTabClick: (index: number) => void;
+  onTabClick: (index: number, tab: string) => void;
   setIsCollapsed: (isCollapsed: boolean) => void;
   items: TabProps[];
-  activeTabIndex: number;
-}> = ({ items, onTabClick, setIsCollapsed, activeTabIndex }) => {
+  activeTab: string;
+}> = ({ items, onTabClick, setIsCollapsed, activeTab }) => {
   return (
     <>
       {items.map((item, index) => (
         <Pill
-          isActive={index === activeTabIndex}
+          isActive={item.name === activeTab}
           onClick={() => {
-            onTabClick(index);
+            onTabClick(index, item.name);
             setIsCollapsed(true);
           }}
           key={index}

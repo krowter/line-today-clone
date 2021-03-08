@@ -7,6 +7,7 @@ import {
   memo,
 } from "react";
 import Slider from "react-slick";
+import { connect } from "react-redux";
 import { ThemeContext } from "styled-components";
 
 import { Tab as _Tab } from "bases/Tab";
@@ -16,6 +17,9 @@ import {
   CollapsedTabsContainer,
   UncollapsedTabsContainer,
 } from "blocks/Tabs/TabsContainer";
+
+import { openTab as _openTab } from "redux/actions/tabAction";
+import { TabsState } from "redux/reducers/tabReducer";
 
 interface TabItem {
   id: number;
@@ -34,7 +38,11 @@ const Tab: React.FC<TabProps> = memo(({ name, onClick, isActive }) => {
   );
 });
 
-export const Tabs: React.FC<{ items: TabItem[] }> = ({ items }) => {
+const _Tabs: React.FC<{
+  items: TabItem[];
+  openTab: (tab: string) => void;
+  activeTab: string;
+}> = ({ items, openTab, activeTab }) => {
   const theme = useContext(ThemeContext);
   const [activeTabIndex, setActiveTabIndex] = useState(0);
 
@@ -67,9 +75,9 @@ export const Tabs: React.FC<{ items: TabItem[] }> = ({ items }) => {
     variableWidth: true,
   };
 
-  const updateActiveTab = useCallback((index: number) => {
+  const updateActiveTab = useCallback((index: number, name: string) => {
     setActiveTabIndex(index);
-
+    openTab(name);
     /* scroll the slider so the active tab
       becomes the 2nd tab from the left */
     sliderRef.current?.slickGoTo(index - 1);
@@ -85,8 +93,8 @@ export const Tabs: React.FC<{ items: TabItem[] }> = ({ items }) => {
                 <Tab
                   {...item}
                   key={item.id}
-                  isActive={activeTabIndex === index}
-                  onClick={() => updateActiveTab(index)}
+                  isActive={activeTab === item.name}
+                  onClick={() => updateActiveTab(index, item.name)}
                 />
               );
             })}
@@ -110,7 +118,7 @@ export const Tabs: React.FC<{ items: TabItem[] }> = ({ items }) => {
           <CollapsibleTabs
             items={items}
             onTabClick={updateActiveTab}
-            activeTabIndex={activeTabIndex}
+            activeTab={activeTab}
             setIsCollapsed={setIsCollapsibleTabMounted}
           />
         </UncollapsedTabsContainer>
@@ -118,3 +126,13 @@ export const Tabs: React.FC<{ items: TabItem[] }> = ({ items }) => {
     </section>
   );
 };
+
+const mapStateToProps = (state: { tabs: TabsState }) => ({
+  activeTab: state.tabs.activeTab,
+});
+
+const mapDispatchToProps = (dispatch: any) => ({
+  openTab: (tab: string) => dispatch(_openTab(tab)),
+});
+
+export const Tabs = connect(mapStateToProps, mapDispatchToProps)(_Tabs);
