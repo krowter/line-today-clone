@@ -4,7 +4,7 @@ export const Tab = styled.div<{ isActive?: boolean }>`
   display: inline-block;
   padding: 1rem;
   cursor: pointer;
-  color: ${({ theme }) => theme.color.darkGray};
+  color: ${({ theme }) => theme.color.darkgray};
 
   &:hover {
     color: ${({ theme }) => theme.color.dark};

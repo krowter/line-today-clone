@@ -12,7 +12,7 @@ export const Card = styled.div<{ type: string }>`
   }
 
   .publisher {
-    color: ${({ theme }) => theme.color.darkGray};
+    color: ${({ theme }) => theme.color.darkgray};
     font-size: ${({ theme }) => theme.fontSize.sm};
   }
 
@@ -27,7 +27,7 @@ export const Card = styled.div<{ type: string }>`
 
       case "regular":
         return `max-width: ${theme.size["2xl"]}; 
-                display: black; 
+                display: block; 
                 flex-basis: calc(50% - ${theme.size.sm}); `;
       default:
         break;
