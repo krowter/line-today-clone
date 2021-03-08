@@ -84,20 +84,24 @@ export const AdvertisingCard = styled.div<{ backgroundImage: string }>`
   margin-top: ${({ theme }) => theme.size.xs};
 `;
 
-export const SectionLinkCard = styled.div<{ backgroundImage: string }>`
-  text-align: center;
+export const SectionLinkCard = styled.a<{ backgroundImage: string }>`
+  display: block;
+  width: 47.5%;
+  cursor: pointer;
+
+  font-weight: ${({ theme }) => theme.fontWeight.semibold};
+  font-size: ${({ theme }) => theme.fontSize["2xl"]};
   color: white;
   background: linear-gradient(
       ${({ theme }) => transparentize(theme.color.skyblue, 40)},
       ${({ theme }) => theme.color.skyblue}
     ),
     ${({ backgroundImage }) => `url(${backgroundImage})`};
+  text-align: center;
   background-position: center;
+
   border-radius: ${({ theme }) => theme.size["2xs"]};
   padding: 1.5rem;
-  font-weight: ${({ theme }) => theme.fontWeight.semibold};
-  font-size: ${({ theme }) => theme.fontSize["2xl"]};
   margin-bottom: ${({ theme }) => theme.size.xs};
   margin-top: ${({ theme }) => theme.size.xs};
-  width: 47.5%;
 `;

@@ -1,4 +1,5 @@
 import getConfig from "next/config";
+import { connect } from "react-redux";
 
 import { ArticleCard } from "blocks/ArticleCard";
 import { AdvertisingCard, SectionLinkCard } from "blocks/ArticleCard/Card";
@@ -7,11 +8,14 @@ import {
   SectionContainer,
 } from "sections/ArticleSection/Containers";
 
+import { openTab as _openTab } from "redux/actions/tabAction";
+import { TabsState } from "redux/reducers/tabReducer";
+
 const {
   publicRuntimeConfig: { emptyImagePlaceholder, advertisementImagePlaceholder },
 } = getConfig();
 
-export const ArticleSection = ({ templates }: any) => {
+const _ArticleSection = ({ templates, openTab }: any) => {
   return (
     <ArticleSectionContainer>
       {templates.map((template: any) => {
@@ -34,7 +38,10 @@ export const ArticleSection = ({ templates }: any) => {
                   const isSectionLink = article.source === "CATABLE";
                   if (isSectionLink)
                     return (
-                      <SectionLinkCard backgroundImage={emptyImagePlaceholder}>
+                      <SectionLinkCard
+                        onClick={() => openTab(article.categoryName)}
+                        backgroundImage={emptyImagePlaceholder}
+                      >
                         {article.categoryName}
                       </SectionLinkCard>
                     );
@@ -55,3 +62,16 @@ export const ArticleSection = ({ templates }: any) => {
     </ArticleSectionContainer>
   );
 };
+
+const mapStateToProps = (state: { tabs: TabsState }) => ({
+  tabs: state.tabs,
+});
+
+const mapDispatchToProps = (dispatch: any) => ({
+  openTab: (tab: string) => dispatch(_openTab(tab)),
+});
+
+export const ArticleSection = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(_ArticleSection);

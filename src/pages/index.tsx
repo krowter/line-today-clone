@@ -5449,10 +5449,14 @@ const mockData = {
   allAdLazyloadingOn: false,
 };
 
-const HomePage = ({ loading, items, fetchArticles, tabs }: any) => {
+const HomePage = ({ loading, items, fetchArticles, tabs, openTab }: any) => {
   useEffect(() => {
     fetchArticles("/api/articles");
   }, []);
+
+  useEffect(() => {
+    openTab("TOP");
+  }, [items]);
 
   const { categoryList = [] }: ArticlesData = items ?? {};
 
@@ -5476,13 +5480,12 @@ const HomePage = ({ loading, items, fetchArticles, tabs }: any) => {
       <Main>
         <Container background="lightgray">
           <Header />
-
           {loading ? (
             <span>Loading</span>
           ) : (
             <>
               <Tabs items={categoryList} />
-              <ArticleSection templates={mockData.templates} />
+              <ArticleSection templates={tabs?.tabContent?.templates || []} />
             </>
           )}
         </Container>
