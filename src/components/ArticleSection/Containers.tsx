@@ -2,8 +2,8 @@ import styled from "styled-components";
 
 import { fadeIn, fadeOut } from "styles/animations";
 
-const fadeSideIn = fadeIn("RIGHT", "30px");
-const fadeSideOut = fadeOut("LEFT", "30px");
+const fadeSideIn = fadeIn("RIGHT", "5px");
+const fadeSideOut = fadeOut("LEFT", "5px");
 
 export const ArticleSectionContainer = styled.section<{ mounted: boolean }>`
   padding-left: 0.5rem;

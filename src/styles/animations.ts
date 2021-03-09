@@ -18,7 +18,9 @@ export const fadeIn = (direction: Direction, amount?: string) => keyframes`
 export const fadeOut = (direction: Direction, amount?: string) => keyframes`
   0% {
     opacity: 1;
-    margin-bottom: 0px;
+    margin-${
+      direction === "LEFT" || direction === "RIGHT" ? "right" : "top"
+    }: 0px;
   }
   100% {
     opacity: 0;
