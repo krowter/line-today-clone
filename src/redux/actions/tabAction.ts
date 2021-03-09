@@ -50,7 +50,7 @@ export const openTab = (_newTab: string, offset = 0) => (
     } = getState() as any;
 
     const tabIndex =
-      categories.findIndex((category: any) => category.name === _newTab) +
+      categories?.findIndex((category: any) => category.name === _newTab) +
       offset;
 
     const tabContent = categories[tabIndex];

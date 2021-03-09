@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import Head from "next/head";
 import Image from "next/image";
 import { connect } from "react-redux";
+import { useRouter } from "next/router";
 
 import { Header } from "blocks/Header";
 import { Container, CenteredContainer, Main } from "bases/Container";
@@ -14,13 +15,26 @@ import { ArticlesState } from "redux/reducers/articleReducer";
 import { TabsState } from "redux/reducers/tabReducer";
 
 const HomePage = ({ loading, items, fetchArticles, tabs, openTab }: any) => {
+  const router = useRouter();
+
   useEffect(() => {
     fetchArticles("/api/articles");
   }, []);
 
   useEffect(() => {
-    openTab("TOP");
+    const { tab } = router.query;
+    if (tabs.activeTab === "") {
+      const initialTab = tab ?? "TOP"; // default tab
+      openTab(initialTab);
+    }
   }, [items]);
+
+  useEffect(() => {
+    // change url shallowly when tab changes (except for first render)
+    if (tabs.activeTab !== "") {
+      router.replace({ query: { tab: tabs.activeTab } });
+    }
+  }, [tabs.activeTab]);
 
   const { categoryList = [] }: ArticlesData = items ?? {};
 
