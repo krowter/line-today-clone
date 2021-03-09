@@ -3,6 +3,7 @@ import { OPEN_TAB, TabAction } from "redux/actions/tabAction";
 const initialState = {
   activeTab: "",
   tabContent: {},
+  tabIndex: 0,
   loading: false,
   error: null,
 };
@@ -21,6 +22,7 @@ export const tabReducer = (state = initialState, action: TabAction) => {
       return {
         ...state,
         loading: false,
+        tabIndex: action.payload.tabIndex,
         tabContent: action.payload.tabContent,
         activeTab: action.payload.tab,
       };

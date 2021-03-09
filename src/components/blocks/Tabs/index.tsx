@@ -43,9 +43,9 @@ const _Tabs: React.FC<{
   items: TabItem[];
   openTab: (tab: string) => void;
   activeTab: string;
-}> = ({ items, openTab, activeTab }) => {
+  activeTabIndex: number;
+}> = ({ items, openTab, activeTab, activeTabIndex }) => {
   const theme = useContext(ThemeContext);
-  const [activeTabIndex, setActiveTabIndex] = useState(0);
 
   const [isCollapsibleTabMounted, setIsCollapsibleTabMounted] = useState(true);
   const [isCollapsed, setIsCollapsed] = useState(
@@ -84,12 +84,15 @@ const _Tabs: React.FC<{
   };
 
   const updateActiveTab = useCallback((index: number, name: string) => {
-    setActiveTabIndex(index);
     openTab(name);
     /* scroll the slider so the active tab
       becomes the 2nd tab from the left */
     sliderRef.current?.slickGoTo(index - 1);
   }, []);
+
+  useEffect(() => {
+    sliderRef.current?.slickGoTo(activeTabIndex - 1);
+  }, [activeTab]);
 
   return (
     <section className="slider variable-width" style={{ position: "relative" }}>
@@ -144,6 +147,7 @@ const _Tabs: React.FC<{
 
 const mapStateToProps = (state: { tabs: TabsState }) => ({
   activeTab: state.tabs.activeTab,
+  activeTabIndex: state.tabs.tabIndex,
 });
 
 const mapDispatchToProps = (dispatch: any) => ({

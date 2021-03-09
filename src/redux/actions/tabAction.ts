@@ -10,6 +10,7 @@ export interface TabAction {
   type: OPEN_TAB;
   payload: {
     tab: string;
+    tabIndex: number;
     tabContent: any;
     error?: any;
   };
@@ -21,13 +22,15 @@ export const openTabBegin = () => ({
 
 export const openTabSuccess = ({
   tab,
+  tabIndex,
   tabContent,
 }: {
   tab: string;
+  tabIndex: number;
   tabContent: any;
 }) => ({
   type: OPEN_TAB.SUCCESS,
-  payload: { tab, tabContent },
+  payload: { tab, tabContent, tabIndex },
 });
 
 export const openTabError = (error: string) => ({
@@ -57,7 +60,7 @@ export const openTab = (_newTab: string, offset = 0) => (
     const newTab = tabContent.name;
 
     setTimeout(() => {
-      dispatch(openTabSuccess({ tab: newTab, tabContent }));
+      dispatch(openTabSuccess({ tab: newTab, tabIndex, tabContent }));
     }, 400); // 0.4ms delay to allow fading animation to take place
   } catch (err) {
     dispatch(openTabError("TAB_DOESNT_EXIST"));
