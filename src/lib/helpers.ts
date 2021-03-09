@@ -19,7 +19,7 @@ export type Direction = "UP" | "DOWN" | "LEFT" | "RIGHT";
 
 export const getAnimationDirection = (
   direction: Direction,
-  amount: string = "10px"
+  amount: string = "20px"
 ) => {
   switch (direction) {
     case "UP":
