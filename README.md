@@ -10,6 +10,11 @@ Len Tudei (playword of "Line Today") is a clone of Line Today's homepage I built
 - Styled-components
 - Redux + Thunk
 
+## Features
+
+- Lazy load templates only when about to enter viewport
+- Supports swipe left/right on mobile to change tabs
+
 ## Getting Started
 
 First, make sure you have git and node installed in your system:
