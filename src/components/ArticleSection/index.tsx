@@ -13,15 +13,22 @@ import { TemplateSection } from "components/ArticleSection/TemplateSection";
 import { openTab as _openTab } from "redux/actions/tabAction";
 import { TabsState } from "redux/reducers/tabReducer";
 
+import { useSwipeSideways } from "lib/hooks";
+
 const {
   publicRuntimeConfig: { advertisementImagePlaceholder },
 } = getConfig();
 
-const _ArticleSection = ({ templates, tabs }: any) => {
+const _ArticleSection = ({ templates, tabs, openTab }: any) => {
   const [templatesPerPage, setTemplatesPerPage] = useState(8);
 
+  useSwipeSideways("swipe-listener", {
+    onSwipeLeft: () => openTab(tabs.activeTab, -1),
+    onSwipeRight: () => openTab(tabs.activeTab, 1),
+  });
+
   return (
-    <ArticleSectionContainer mounted={tabs.loading}>
+    <ArticleSectionContainer mounted={tabs.loading} id="swipe-listener">
       {templates
         .slice(0, templatesPerPage)
         .map((template: any, index: number) => {
@@ -69,4 +76,11 @@ const mapStateToProps = (state: { tabs: TabsState }) => ({
   tabs: state.tabs,
 });
 
-export const ArticleSection = connect(mapStateToProps)(_ArticleSection);
+const mapDispatchToProps = (dispatch: any) => ({
+  openTab: (tab: string, offset: number) => dispatch(_openTab(tab, offset)),
+});
+
+export const ArticleSection = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(_ArticleSection);

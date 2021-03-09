@@ -35,7 +35,9 @@ export const openTabError = (error: string) => ({
   payload: { error },
 });
 
-export const openTab = (newTab: string) => (
+// use offset = 1 to open next tab
+// use offset = -1 to open previous tab
+export const openTab = (_newTab: string, offset = 0) => (
   dispatch: Dispatch,
   getState: () => void
 ) => {
@@ -47,9 +49,12 @@ export const openTab = (newTab: string) => (
       },
     } = getState() as any;
 
-    const tabContent = categories.find(
-      (category: any) => category.name === newTab
-    );
+    const tabIndex =
+      categories.findIndex((category: any) => category.name === _newTab) +
+      offset;
+
+    const tabContent = categories[tabIndex];
+    const newTab = tabContent.name;
 
     setTimeout(() => {
       dispatch(openTabSuccess({ tab: newTab, tabContent }));
