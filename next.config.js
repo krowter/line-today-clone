@@ -5,4 +5,7 @@ module.exports = {
     advertisementImagePlaceholder:
       "https://i.picsum.photos/id/127/4032/2272.jpg?hmac=QFoFT2_eb_DCqjdlj09UFgUHwI_zefDTBdECRz9lO5Q",
   },
+  serverRuntimeConfig: {
+    apiUrl: "https://today.line.me/id/portaljson",
+  },
 };
