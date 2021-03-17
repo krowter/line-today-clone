@@ -21,7 +21,7 @@ First, make sure you have git and node installed in your system:
 
 1. Go ahead and clone this repo
 
-2. Move into the directory `cd technical-test-sejutacita`
+2. Move into the directory `cd line-today-clone`
 
 3. Install the packages
 
